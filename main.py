@@ -78,6 +78,9 @@ def engineSpeedChange():
         print(zData.value)
         serialSend(['e',zData.value])
 
+def retract():
+    ui.retractButton.setStyleSheet("background-color : red")
+    serialSend(['c0'])
 
 #connect our Arduino
 serial = QSerialPort()
@@ -87,6 +90,7 @@ serial.open(QIODevice.ReadWrite)
 
 ui.servoPitchSlider.valueChanged.connect(pitchChange)
 ui.engineSlider.valueChanged.connect(engineSpeedChange)
+ui.retractButton.clicked.connect(retract)
 
 ui.show()
 app.exec()
