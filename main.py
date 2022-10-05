@@ -25,6 +25,8 @@ world = client.get_world(1) # get world with id 1
 
 minHR = 80
 maxHR = 180
+minRPM = 900
+maxRPM = 1300
 
 def serialSend(data):
     txt = ""
@@ -51,7 +53,7 @@ class zwiftData(QThread):
                         val = minHR
                     if val > maxHR:
                         val = maxHR
-                    val = 900 + (val-minHR)*4
+                    val = minRPM + round((val-minHR)/(maxHR-minHR)*(maxRPM-minRPM))
                     self.value = val
                     #serialSend(['e',val])
                     ui.engineSlider.setValue(val)
