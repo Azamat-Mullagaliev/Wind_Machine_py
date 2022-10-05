@@ -11,9 +11,6 @@ app = QtWidgets.QApplication([])
 ui = uic.loadUi("design.ui")
 ui.setWindowTitle("Wind machine")
 
-ui.engineRPMValueLabel.setText(str(ui.engineSlider.value()))
-ui.servoPitchValueLabel.setText(str(ui.servoPitchSlider.value()))
-
 #reading logs for zwift
 file1 = open('logs.txt', 'r')
 username = file1.readline().rstrip()
@@ -27,6 +24,12 @@ minHR = 80
 maxHR = 180
 minRPM = 900
 maxRPM = 1300
+
+ui.engineSlider.setMinimum(minRPM)
+ui.engineSlider.setMaximum(maxRPM)
+
+ui.engineRPMValueLabel.setText(str(ui.engineSlider.value()))
+ui.servoPitchValueLabel.setText(str(ui.servoPitchSlider.value()))
 
 def serialSend(data):
     txt = ""
@@ -55,7 +58,7 @@ class zwiftData(QThread):
                         val = maxHR
                     val = minRPM + round((val-minHR)/(maxHR-minHR)*(maxRPM-minRPM))
                     self.value = val
-                    #serialSend(['e',val])
+                    #serialSend(['e',val]) 
                     ui.engineSlider.setValue(val)
                     ui.engineRPMValueLabel.setText(str(val))
                     ui.heartRateValueLabel.setText(str(self.heartrate))
