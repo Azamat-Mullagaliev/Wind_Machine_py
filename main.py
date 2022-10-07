@@ -20,10 +20,10 @@ player_id = file1.readline().rstrip()
 client = Client(username, password)
 world = client.get_world(1) # get world with id 1
 
-minHR = 80
+minHR = 100
 maxHR = 180
 minRPM = 900
-maxRPM = 1300
+maxRPM = 1350
 
 ui.engineSlider.setMinimum(minRPM)
 ui.engineSlider.setMaximum(maxRPM)
