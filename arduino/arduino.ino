@@ -43,12 +43,10 @@ void setup()
   deployServoWrite(169);
   
   pitch.attach(3);
-  pitch.write(145);
-  
-  engineStart();
-
   pitch.write(40);
+  delay(500);
   
+  //engineStart();
   
   Serial.begin(115200);
 }

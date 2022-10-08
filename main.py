@@ -1,7 +1,6 @@
 import time
 #for window app
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtWidgets import QWidget
 from PyQt5.QtSerialPort import QSerialPort
 from PyQt5.QtCore import QThread, QIODevice
 
@@ -80,7 +79,7 @@ def engineSpeedChange():
         serialSend(['e',val])
         ui.engineRPMValueLabel.setText(str(val))
     else:
-        print(zData.value)
+        #print(zData.value)
         serialSend(['e',zData.value])
 
 def retract():
