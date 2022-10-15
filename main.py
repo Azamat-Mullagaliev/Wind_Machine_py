@@ -92,7 +92,10 @@ def engineStart():
 #connect our Arduino
 serial = QSerialPort()
 serial.setBaudRate(115200)
-serial.setPortName('COM4')
+try:
+    serial.setPortName('COM4')
+finally:
+    serial.setPortName('COM3')
 serial.open(QIODevice.ReadWrite)
 
 ui.servoPitchSlider.valueChanged.connect(pitchChange)
