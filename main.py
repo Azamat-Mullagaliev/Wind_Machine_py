@@ -19,10 +19,11 @@ player_id = file1.readline().rstrip()
 client = Client(username, password)
 world = client.get_world(1) # get world with id 1
 
-minHR = 100
-maxHR = 180
-minRPM = 900
-maxRPM = 1350
+file2 = open('settings.txt', 'r')
+minHR = int(file2.readline().rstrip()) #100
+maxHR = int(file2.readline().rstrip()) #180
+minRPM = int(file2.readline().rstrip()) #900
+maxRPM = int(file2.readline().rstrip()) #2300
 
 ui.engineSlider.setMinimum(minRPM)
 ui.engineSlider.setMaximum(maxRPM)
