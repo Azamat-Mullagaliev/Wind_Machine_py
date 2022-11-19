@@ -1,3 +1,4 @@
+from operator import truediv
 import time
 #for window app
 from PyQt5 import QtWidgets, uic
@@ -18,6 +19,7 @@ player_id = file1.readline().rstrip()
 
 client = Client(username, password)
 world = client.get_world(1) # get world with id 1
+connected = True
 
 file2 = open('settings.txt', 'r')
 minHR = int(file2.readline().rstrip()) #100
@@ -50,6 +52,9 @@ class zwiftData(QThread):
 
             if ui.zwiftModeCheckBox.isChecked()==True:
                 try:
+                    if not(connected):
+                        connected = True
+                        ui.zwiftModeCheckBox.setText("Zwift Mode")
                     self.heartrate = world.player_status(player_id).heartrate
                     val = int(self.heartrate)
                     if val < minHR:
@@ -63,7 +68,8 @@ class zwiftData(QThread):
                     ui.engineRPMValueLabel.setText(str(val))
                     ui.heartRateValueLabel.setText(str(self.heartrate))
                 except:
-                    ui.zwiftModeCheckBox.setChecked(False)
+                    connected = False
+                    ui.zwiftModeCheckBox.setText("Reconnecting")
             time.sleep(3)
 
 zData = zwiftData()

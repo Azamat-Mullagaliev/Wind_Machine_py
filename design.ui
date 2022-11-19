@@ -20,7 +20,7 @@
    <widget class="QCheckBox" name="zwiftModeCheckBox">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>10</x>
       <y>10</y>
       <width>101</width>
       <height>31</height>
@@ -190,7 +190,7 @@
    <widget class="QPushButton" name="retractButton">
     <property name="geometry">
      <rect>
-      <x>9</x>
+      <x>140</x>
       <y>220</y>
       <width>101</width>
       <height>31</height>
@@ -209,7 +209,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>220</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -221,6 +221,24 @@
     </property>
     <property name="text">
      <string>Engine start</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="swingCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Swing +-10</string>
     </property>
    </widget>
   </widget>
