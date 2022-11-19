@@ -75,10 +75,48 @@ class zwiftData(QThread):
 zData = zwiftData()
 zData.start()
 
+class swingMode(QThread):
+    def __init__(self, parent=None):
+        super().__init__()
+        self.position = ui.servoPitchSlider.value()
+        self.isdirectedup = True
+
+    def run(self):
+        while True:
+            if ui.swingCheckBox.isChecked():
+                val = ui.servoPitchSlider.value()
+
+                if val > 30 and val < 60:
+                    maxswing = val + 10
+                    minswing = val - 10
+                elif val < 31:
+                    maxswing = 40
+                    minswing = 20
+                else:
+                    maxswing = 70
+                    minswing = 50
+
+                if self.position == maxswing:
+                    self.isdirectedup = False
+                if self.position == minswing:
+                    self.isdirectedup = True
+                if self.isdirectedup:
+                    self.position += 1
+                else:
+                    self.position -= 1
+                #ui.servoPitchSlider.setValue(self.position)
+                #ui.servoPitchValueLabel.setText(str(self.position))
+                serialSend(['p',self.position])
+                time.sleep(0.3)
+
+sMode = swingMode()
+sMode.start()
+
 def pitchChange():
     val = ui.servoPitchSlider.value()
-    serialSend(['p',val])
     ui.servoPitchValueLabel.setText(str(val))
+    if ui.swingCheckBox.isChecked() == False:
+        serialSend(['p',val])
 
 def engineSpeedChange():
     if ui.zwiftModeCheckBox.isChecked()==False:
