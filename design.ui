@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>260</width>
-    <height>273</height>
+    <width>257</width>
+    <height>279</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -239,6 +239,28 @@
     </property>
     <property name="text">
      <string>Swing +-10</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="swingSlider">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>310</y>
+      <width>231</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>20</number>
+    </property>
+    <property name="maximum">
+     <number>70</number>
+    </property>
+    <property name="value">
+     <number>50</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
   </widget>

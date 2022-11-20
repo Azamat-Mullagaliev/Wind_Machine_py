@@ -96,21 +96,27 @@ class swingMode(QThread):
                     maxswing = 70
                     minswing = 50
 
-                if self.position == maxswing:
+                if self.position >= maxswing:
                     self.isdirectedup = False
-                if self.position == minswing:
+                if self.position <= minswing:
                     self.isdirectedup = True
                 if self.isdirectedup:
                     self.position += 1
                 else:
                     self.position -= 1
+                ui.swingSlider.setValue(self.position)
                 #ui.servoPitchSlider.setValue(self.position)
                 #ui.servoPitchValueLabel.setText(str(self.position))
-                serialSend(['p',self.position])
-                time.sleep(0.3)
+                #serialSend(['p',self.position])
+                time.sleep(0.15)
 
 sMode = swingMode()
 sMode.start()
+
+
+def swingChange():
+    val = ui.swingSlider.value()
+    serialSend(['p',val])
 
 def pitchChange():
     val = ui.servoPitchSlider.value()
@@ -143,6 +149,7 @@ finally:
     serial.setPortName('COM3')
 serial.open(QIODevice.ReadWrite)
 
+ui.swingSlider.valueChanged.connect(swingChange)
 ui.servoPitchSlider.valueChanged.connect(pitchChange)
 ui.engineSlider.valueChanged.connect(engineSpeedChange)
 ui.retractButton.clicked.connect(retract)
